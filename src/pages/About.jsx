@@ -61,7 +61,7 @@ export default function About() {
           ].map(([label, value]) => (
             <div key={label} style={{ background: 'var(--cream)', padding: '1.2rem 1.5rem', display: 'grid', gridTemplateColumns: '130px 1fr', gap: '1rem', alignItems: 'center', borderLeft: `3px solid ${label === 'Board Role' || label === 'Appointed' ? 'var(--green-mid)' : 'var(--gold)'}` }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>{label}</div>
-              <div style={{ fontSize: '.92rem', color: label === 'Board Role' ? 'var(--green-deep)' : 'var(--ink)', fontWeight: label === 'Board Role' ? 700 : 500 }}>{value}</div>
+              <div style={{ fontSize: '1rem', color: label === 'Board Role' ? 'var(--green-deep)' : 'var(--ink)', fontWeight: label === 'Board Role' ? 700 : 500 }}>{value}</div>
             </div>
           ))}
         </div>

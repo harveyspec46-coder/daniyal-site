@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '../lib/sanityClient'
 import { FEATURED_RESEARCH_QUERY, ALL_JOURNALISM_QUERY } from '../lib/queries'
@@ -37,27 +37,13 @@ function StatScroll({ stats, label, labelColor }) {
         {label}
       </div>
       <div style={{ overflow: 'hidden', background: 'rgba(255,255,255,.03)' }}>
-        <div style={{
-          display: 'flex',
-          animation: 'statsScroll 40s linear infinite',
-          width: 'max-content',
-        }}>
+        <div style={{ display: 'flex', animation: 'statsScroll 40s linear infinite', width: 'max-content' }}>
           {doubled.map((stat, i) => (
-            <div key={i} style={{
-              background: 'var(--ink)',
-              padding: '2.5rem 2.5rem',
-              position: 'relative',
-              overflow: 'hidden',
-              flexShrink: 0,
-              width: '320px',
-              borderRight: '1px solid rgba(255,255,255,.06)',
-              transition: 'background .25s',
-            }}
+            <div key={i} style={{ background: 'var(--ink)', padding: '2.5rem 2.5rem', position: 'relative', overflow: 'hidden', flexShrink: 0, width: '320px', borderRight: '1px solid rgba(255,255,255,.06)', transition: 'background .25s' }}
               onMouseEnter={e => { e.currentTarget.style.background = '#162010'; e.currentTarget.parentElement.style.animationPlayState = 'paused' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'var(--ink)'; e.currentTarget.parentElement.style.animationPlayState = 'running' }}
             >
               <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: labelColor }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: labelColor, opacity: .3 }} />
               <div style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: '.55rem', letterSpacing: '.12em', textTransform: 'uppercase', padding: '.2rem .7rem', marginBottom: '1rem', background: stat.country === 'United States' ? 'rgba(201,168,76,.12)' : 'rgba(122,184,147,.1)', color: labelColor, border: `1px solid ${stat.country === 'United States' ? 'rgba(201,168,76,.3)' : 'rgba(122,184,147,.25)'}` }}>
                 {stat.source}
               </div>
@@ -80,11 +66,9 @@ function StatScroll({ stats, label, labelColor }) {
 
 export default function Home() {
   const [journalism, setJournalism] = useState([])
-  const [reports, setReports] = useState([])
 
   useEffect(() => {
     client.fetch(ALL_JOURNALISM_QUERY).then(d => { if (d?.length) setJournalism(d) }).catch(() => {})
-    client.fetch(FEATURED_RESEARCH_QUERY).then(d => { if (d?.length) setReports(d) }).catch(() => {})
   }, [])
 
   return (
@@ -108,18 +92,9 @@ export default function Home() {
           .cards-grid { grid-template-columns: 1fr !important; }
           .cards-sec { padding: 4rem 1.5rem !important; }
           .mission-grid { grid-template-columns: 1fr !important; gap: 2rem !important; padding: 3rem 1.5rem !important; }
-          .footer-top { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
           .skills-grid { grid-template-columns: 1fr 1fr !important; }
           .pages-header { padding: 0 1.5rem !important; }
-        }
-        @media (max-width: 560px) {
-          .footer-top { grid-template-columns: 1fr !important; }
-          .hero-bar { flex-direction: column !important; align-items: flex-start !important; gap: .5rem !important; }
-          .bar-sep { display: none !important; }
-          .tags { gap: .4rem !important; }
-          .hero-btns { flex-direction: column !important; align-items: flex-start !important; }
-          nav ul { display: none !important; }
-          .nav-donate-text { display: none !important; }
+          .creds-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -128,7 +103,6 @@ export default function Home() {
         <div aria-hidden="true" style={{ position: 'absolute', fontFamily: 'var(--font-display)', fontSize: '42vw', color: 'rgba(255,255,255,.022)', lineHeight: 1, top: '-5%', right: '-8%', pointerEvents: 'none', userSelect: 'none' }}>D</div>
 
         <div className="hero-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', padding: '6rem 3rem 4rem', position: 'relative', zIndex: 2, gap: '3rem' }}>
-          {/* LEFT */}
           <div style={{ animation: 'fadeUp .7s ease both' }}>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '.8rem' }}>
               <span style={{ width: 32, height: 1, background: 'var(--gold)', display: 'inline-block' }} />
@@ -140,17 +114,17 @@ export default function Home() {
               <span style={{ color: 'var(--gold)' }}>MATTERS.</span>
             </h1>
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,.65)', lineHeight: 1.8, maxWidth: 480, marginBottom: '2rem' }}>
-              Photojournalist, researcher and board member documenting the drug crisis across Pakistan and the United States.
+              Muhammad Daniyal Siddiqui — Secretary, Board of Directors at SCP. Photojournalist and researcher documenting the drug crisis across Pakistan and the United States.
             </p>
             <div className="tags" style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-              {['Drug Addiction', 'Poverty', 'Photojournalism', 'Policy Research', 'US & Pakistan'].map((tag, i) => (
-                <span key={tag} style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', padding: '.35rem 1rem', border: i < 2 ? '1px solid var(--gold)' : '1px solid rgba(201,168,76,.35)', color: i < 2 ? 'var(--gold)' : 'rgba(255,255,255,.55)', background: i < 2 ? 'rgba(201,168,76,.08)' : 'transparent' }}>
+              {['Secretary · SCP Board', 'Drug Addiction', 'Photojournalism', 'Policy Research', 'US & Pakistan'].map((tag, i) => (
+                <span key={tag} style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', padding: '.35rem 1rem', border: i < 1 ? '1px solid var(--gold)' : '1px solid rgba(201,168,76,.35)', color: i < 1 ? 'var(--gold)' : 'rgba(255,255,255,.55)', background: i < 1 ? 'rgba(201,168,76,.08)' : 'transparent' }}>
                   {tag}
                 </span>
               ))}
             </div>
             <div className="hero-btns" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <Link to="/documented-research" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2.2rem', fontWeight: 500, transition: 'background .2s' }}>Explore the Work</Link>
+              <Link to="/documented-research" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2.2rem', fontWeight: 500 }}>Explore the Work</Link>
               <Link to="/journalism" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,.6)', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,.25)' }}>View Journalism</Link>
             </div>
           </div>
@@ -158,10 +132,10 @@ export default function Home() {
           {/* RIGHT stat stack */}
           <div className="stat-stack" style={{ display: 'flex', flexDirection: 'column', gap: 1, animation: 'fadeUp .7s .1s ease both', opacity: 0 }}>
             {[
-              { flag: '🇺🇸', src: 'CDC 2025', lbl: 'Provisional Overdose Deaths', val: '69,973', unit: 'Deaths 2025', color: 'var(--gold)' },
-              { flag: '🇺🇸', src: 'CDC 2024', lbl: 'Total Overdose Deaths', val: '80,391', unit: 'Deaths 2024', color: 'var(--gold)' },
-              { flag: '🇵🇰', src: 'National Survey', lbl: 'Estimated Daily Deaths', val: '700', unit: 'Deaths Per Day', color: 'var(--green-light)' },
-              { flag: '🇵🇰', src: 'Federal Review', lbl: 'Annual Estimated Deaths', val: '250,000', unit: 'Deaths Per Year', color: 'var(--green-light)' },
+              { src: 'CDC 2025', lbl: 'Provisional Overdose Deaths', val: '69,973', unit: 'Deaths 2025', color: 'var(--gold)', flag: '🇺🇸' },
+              { src: 'CDC 2024', lbl: 'Total Overdose Deaths', val: '80,391', unit: 'Deaths 2024', color: 'var(--gold)', flag: '🇺🇸' },
+              { src: 'National Survey', lbl: 'Estimated Daily Deaths', val: '700', unit: 'Deaths Per Day', color: 'var(--green-light)', flag: '🇵🇰' },
+              { src: 'Federal Review', lbl: 'Annual Estimated Deaths', val: '250,000', unit: 'Deaths Per Year', color: 'var(--green-light)', flag: '🇵🇰' },
             ].map((s, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)', padding: '1.8rem 2rem', display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: '1rem', position: 'relative', transition: 'background .25s' }}
                 onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,.08)'}
@@ -185,7 +159,12 @@ export default function Home() {
 
         {/* BOTTOM BAR */}
         <div className="hero-bar" style={{ background: 'rgba(0,0,0,.3)', borderTop: '1px solid rgba(255,255,255,.06)', padding: '1.4rem 3rem', display: 'flex', alignItems: 'center', gap: '2.5rem', flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
-          {[['Board Member', 'Sawyer Culberson Project'], ['501(c)(3)', 'Non-Profit United States'], ['Field Based', 'Karachi, Pakistan'], ['Photojournalist', 'Researcher & Consultant']].map(([strong, rest], i) => (
+          {[
+            ['Secretary, Board of Directors', 'Sawyer Culberson Project'],
+            ['501(c)(3)', 'Non-Profit United States'],
+            ['Appointed', 'February 2024'],
+            ['Field Based', 'Karachi, Pakistan'],
+          ].map(([strong, rest], i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '.8rem', fontFamily: 'var(--font-mono)', fontSize: '.68rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.45)' }}>
               {i > 0 && <span className="bar-sep" style={{ width: 1, height: 28, background: 'rgba(255,255,255,.1)' }} />}
               <strong style={{ color: 'var(--gold)', fontWeight: 500 }}>{strong}</strong> {rest}
@@ -194,7 +173,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TICKER */}
       <Ticker />
 
       {/* ABOUT */}
@@ -207,28 +185,27 @@ export default function Home() {
             ONE CRISIS.
           </h2>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.9, color: 'var(--text-muted)', marginBottom: '2rem', fontWeight: 300 }}>
-            I am Daniyal, a self-taught software engineer, researcher, photojournalist, and board member of the Sawyer Culberson Project, a US-based 501(c)(3) nonprofit. Living in Pakistan while working internationally, I document the drug addiction crisis in real time and connect the human stories that statistics alone can never tell.
+            I am Muhammad Daniyal Siddiqui — <strong style={{ color: 'var(--ink)' }}>Secretary of the Board of Directors</strong> at the Sawyer Culberson Project, a US-based 501(c)(3) nonprofit, since February 2024. Based in Karachi, I document the drug addiction crisis in real time and connect the human stories that statistics alone can never tell.
           </p>
           <Link to="/about" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2.2rem', fontWeight: 500, display: 'inline-block', marginBottom: '1.5rem' }}>Read My Full Story</Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: '.8rem', background: 'var(--green-deep)', color: 'var(--white)', padding: '1rem 1.5rem', fontFamily: 'var(--font-mono)', fontSize: '.68rem', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: '.5rem', width: 'fit-content' }}>
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold)', animation: 'pulse 2s ease-in-out infinite', flexShrink: 0 }} />
-            Active Board Member SCP 501(c)(3)
+            Secretary · Board of Directors · SCP 501(c)(3)
           </div>
         </div>
 
-        {/* Skills with background images */}
+        {/* Skills — NO emojis */}
         <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
           {[
-            { icon: '💻', title: 'Software Engineer', desc: 'Self-taught Full Stack', bg: 'linear-gradient(135deg, var(--green-deep) 0%, var(--ink-muted) 100%)' },
-            { icon: '📷', title: 'Photojournalist', desc: 'Field Documentation', bg: 'linear-gradient(135deg, #1a1a1a 0%, var(--green-deep) 100%)' },
-            { icon: '🔬', title: 'Researcher', desc: 'Data & UN Reports', bg: 'linear-gradient(135deg, var(--ink) 0%, var(--green-mid) 100%)' },
-            { icon: '🌍', title: 'Consultant', desc: 'Nonprofit & Policy', bg: 'linear-gradient(135deg, var(--green-mid) 0%, var(--ink) 100%)' },
-          ].map((s, i) => (
+            { title: 'Software Engineer', desc: 'Self-taught Full Stack', bg: 'linear-gradient(135deg, var(--green-deep) 0%, var(--ink-muted) 100%)' },
+            { title: 'Photojournalist', desc: 'Field Documentation', bg: 'linear-gradient(135deg, #1a1a1a 0%, var(--green-deep) 100%)' },
+            { title: 'Researcher', desc: 'Data & UN Reports', bg: 'linear-gradient(135deg, var(--ink) 0%, var(--green-mid) 100%)' },
+            { title: 'Board Secretary', desc: 'Nonprofit & Policy', bg: 'linear-gradient(135deg, var(--green-mid) 0%, var(--ink) 100%)' },
+          ].map((s) => (
             <div key={s.title} style={{ background: s.bg, padding: '2rem 1.5rem', position: 'relative', overflow: 'hidden', minHeight: 160 }}>
               <div style={{ position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '2rem', marginBottom: '.8rem' }}>{s.icon}</div>
-                <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '.4rem' }}>{s.title}</div>
+                <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--white)', marginBottom: '.4rem' }}>{s.title}</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.6rem', letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,.5)' }}>{s.desc}</div>
               </div>
             </div>
@@ -236,7 +213,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CRISIS DATA — ANIMATED SCROLL */}
+      {/* CREDENTIALS BAND */}
+      <section style={{ background: 'var(--gold)', padding: '3rem' }}>
+        <div className="creds-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '2rem', alignItems: 'center' }}>
+          {[
+            { label: 'Title', value: 'Secretary, Board of Directors' },
+            { label: 'Organization', value: 'Sawyer Culberson Project · 501(c)(3)' },
+            { label: 'Appointed', value: 'February 2024' },
+            { label: 'Verification', value: 'sawyer-culberson-project.org' },
+          ].map(({ label, value }) => (
+            <div key={label} style={{ borderLeft: '3px solid rgba(15,26,20,.2)', paddingLeft: '1.2rem' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.55rem', letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(15,26,20,.5)', marginBottom: '.3rem' }}>{label}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', color: 'var(--ink)', letterSpacing: '.02em', lineHeight: 1.3 }}>{value}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CRISIS DATA */}
       <section className="crisis-section" style={{ background: 'var(--green-deep)', padding: '6rem 0', position: 'relative', overflow: 'hidden' }}>
         <div aria-hidden="true" style={{ position: 'absolute', right: '-2rem', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontFamily: 'var(--font-display)', fontSize: '18rem', color: 'rgba(255,255,255,.02)', pointerEvents: 'none' }}>DATA</div>
 
@@ -256,12 +250,6 @@ export default function Home() {
         <StatScroll stats={PK_STATS} label="Pakistan Data — UNODC / Ministry of Narcotics / ANF" labelColor="var(--green-light)" />
 
         <div style={{ padding: '3rem 3rem 0', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          {['UN World Drug Report', 'Global Opioid Crisis Report', 'UN Drug Report Urdu'].map(r => (
-            <a key={r} href="#" style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--ink)', background: 'var(--gold)', padding: '.75rem 1.4rem', transition: 'background .2s' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'var(--gold-light)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'var(--gold)'}
-            >Download {r}</a>
-          ))}
           <Link to="/documented-research" style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', border: '1px solid rgba(255,255,255,.15)', padding: '.75rem 1.4rem' }}>View All Research</Link>
         </div>
       </section>

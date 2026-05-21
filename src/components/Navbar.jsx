@@ -11,7 +11,6 @@ const links = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -30,12 +29,29 @@ export default function Navbar() {
       transition: 'background .3s',
     }}>
       {/* Brand */}
-      <Link to="/" style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', letterSpacing: '.08em', color: 'var(--white)' }}>
-        DANIYAL<span style={{ color: 'var(--gold)' }}>.</span>
+      <Link to="/" style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', letterSpacing: '.06em', color: 'var(--white)', lineHeight: 1 }}>
+        VOICE OF <span style={{ color: 'var(--gold)' }}>DANIYAL</span><span style={{ color: 'var(--gold)' }}>.</span>
       </Link>
 
+      {/* Secretary badge */}
+      <div style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: '.52rem',
+        letterSpacing: '.12em',
+        textTransform: 'uppercase',
+        color: 'rgba(201,168,76,.7)',
+        borderLeft: '1px solid rgba(201,168,76,.2)',
+        paddingLeft: '1.2rem',
+        lineHeight: 1.6,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        <span style={{ color: 'var(--gold)', fontWeight: 600 }}>Secretary, Board of Directors</span>
+        <span>Sawyer Culberson Project · 501(c)(3)</span>
+      </div>
+
       {/* Desktop links */}
-      <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none' }}>
+      <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
         {links.map(({ to, label }) => (
           <li key={to}>
             <NavLink
@@ -43,8 +59,8 @@ export default function Navbar() {
               end={to === '/'}
               style={({ isActive }) => ({
                 fontFamily: 'var(--font-mono)',
-                fontSize: '.68rem',
-                letterSpacing: '.14em',
+                fontSize: '.65rem',
+                letterSpacing: '.12em',
                 textTransform: 'uppercase',
                 color: isActive ? 'var(--gold)' : 'rgba(255,255,255,.6)',
                 textDecoration: 'none',
@@ -66,8 +82,8 @@ export default function Navbar() {
         rel="noreferrer"
         style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '.68rem',
-          letterSpacing: '.14em',
+          fontSize: '.65rem',
+          letterSpacing: '.12em',
           textTransform: 'uppercase',
           background: 'var(--gold)',
           color: 'var(--ink)',
