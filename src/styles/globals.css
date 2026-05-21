@@ -1,0 +1,123 @@
+/* ── DESIGN TOKENS ──────────────────────────────────────────────── */
+:root {
+  --green-deep:    #1a3a2a;
+  --green-mid:     #2d5a3d;
+  --green-bright:  #3d7a52;
+  --green-light:   #7ab893;
+  --gold:          #c9a84c;
+  --gold-light:    #e8c97a;
+  --cream:         #f5f0e4;
+  --cream-dark:    #e8e0ce;
+  --white:         #fdfaf4;
+  --ink:           #0f1a14;
+  --ink-muted:     #2a3d30;
+  --text-muted:    #6b7d6f;
+
+  --font-display:  'Bebas Neue', sans-serif;
+  --font-serif:    'Fraunces', Georgia, serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+  --font-body:     'Manrope', sans-serif;
+
+  --nav-height:    64px;
+  --section-pad:   6rem 3rem;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+ul { list-style: none; }
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--green-mid); }
+
+/* ── SECTION TAG ────────────────────────────────────────────────── */
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.section-tag::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ── BUTTONS ────────────────────────────────────────────────────── */
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 1rem 2.2rem;
+  display: inline-block;
+  font-weight: 500;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.25);
+  transition: color .2s, border-color .2s;
+  display: inline-block;
+}
+.btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+/* ── NOISE TEXTURE ──────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ── PAGE TRANSITIONS ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fadeUp .7s ease both; }
+.fade-up-2 { animation: fadeUp .7s .1s ease both; }
+.fade-up-3 { animation: fadeUp .7s .2s ease both; }
+.fade-up-4 { animation: fadeUp .7s .3s ease both; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --section-pad: 4rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 560px) {
+  :root { --section-pad: 3rem 1.2rem; }
+  .footer-top { grid-template-columns: 1fr !important; }
+  nav ul { display: none !important; }
+}
