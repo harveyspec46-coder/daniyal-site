@@ -19,7 +19,6 @@
   --font-body:     'Manrope', sans-serif;
 
   --nav-height:    64px;
-  --max-width:     1280px;
   --section-pad:   6rem 3rem;
 }
 
@@ -30,7 +29,7 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -44,15 +43,10 @@ ul { list-style: none; }
 ::-webkit-scrollbar-track { background: var(--cream); }
 ::-webkit-scrollbar-thumb { background: var(--green-mid); }
 
-/* ── TYPOGRAPHY HELPERS ─────────────────────────────────────────── */
-.display { font-family: var(--font-display); letter-spacing: .02em; line-height: .96; }
-.serif   { font-family: var(--font-serif); }
-.mono    { font-family: var(--font-mono); }
-
-/* ── SHARED SECTION LABEL ───────────────────────────────────────── */
+/* ── SECTION TAG ────────────────────────────────────────────────── */
 .section-tag {
   font-family: var(--font-mono);
-  font-size: .6rem;
+  font-size: .68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--green-mid);
@@ -72,12 +66,12 @@ ul { list-style: none; }
 /* ── BUTTONS ────────────────────────────────────────────────────── */
 .btn-primary {
   font-family: var(--font-mono);
-  font-size: .68rem;
+  font-size: .72rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   background: var(--gold);
   color: var(--ink);
-  padding: .85rem 2rem;
+  padding: 1rem 2.2rem;
   display: inline-block;
   font-weight: 500;
   transition: background .2s, transform .15s;
@@ -86,11 +80,11 @@ ul { list-style: none; }
 
 .btn-ghost {
   font-family: var(--font-mono);
-  font-size: .68rem;
+  font-size: .72rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(255,255,255,.6);
-  padding: .85rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid rgba(255,255,255,.25);
   transition: color .2s, border-color .2s;
   display: inline-block;
@@ -118,6 +112,12 @@ body::before {
 .fade-up-4 { animation: fadeUp .7s .3s ease both; }
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   :root { --section-pad: 4rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 560px) {
+  :root { --section-pad: 3rem 1.2rem; }
+  .footer-top { grid-template-columns: 1fr !important; }
+  nav ul { display: none !important; }
 }

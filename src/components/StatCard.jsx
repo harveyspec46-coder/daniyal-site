@@ -8,72 +8,41 @@ export default function StatCard({ label, value, unit, country, source }) {
   return (
     <div style={{
       background: 'var(--ink)',
-      padding: '2rem 1.8rem',
+      padding: '2.5rem 2rem',
       position: 'relative',
       overflow: 'hidden',
-      transition: 'background .25s',
-      cursor: 'default',
-    }}
-      onMouseEnter={e => e.currentTarget.style.background = '#162010'}
-      onMouseLeave={e => e.currentTarget.style.background = 'var(--ink)'}
-    >
-      {/* Left accent bar */}
-      <div style={{
-        position: 'absolute', left: 0, top: 0, bottom: 0,
-        width: 3, background: accentColor,
-      }} />
+      flexShrink: 0,
+      width: '340px',
+      borderRight: '1px solid rgba(255,255,255,.06)',
+    }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: accentColor }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: accentColor, transformOrigin: 'left', animation: 'growBar 1.5s ease forwards' }} />
 
-      {/* Bottom accent bar */}
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0,
-        height: 2, background: accentColor,
-        transformOrigin: 'left',
-        animation: 'growBar 1.5s ease forwards',
-      }} />
-
-      <div style={{
-        display: 'inline-block',
-        fontFamily: 'var(--font-mono)',
-        fontSize: '.55rem',
-        letterSpacing: '.12em',
-        textTransform: 'uppercase',
-        padding: '.2rem .6rem',
-        marginBottom: '.8rem',
-        background: flagBg,
-        color: accentColor,
-        border: `1px solid ${flagBorder}`,
-      }}>
+      <div style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.12em', textTransform: 'uppercase', padding: '.25rem .7rem', marginBottom: '1rem', background: flagBg, color: accentColor, border: `1px solid ${flagBorder}` }}>
         {flag}
       </div>
 
-      <div style={{
-        fontFamily: 'var(--font-display)',
-        fontSize: 'clamp(2.5rem,4vw,3.8rem)',
-        color: 'var(--white)',
-        lineHeight: 1,
-        letterSpacing: '.02em',
-        marginBottom: '.4rem',
-      }}>
+      <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem,5vw,4.2rem)', color: 'var(--white)', lineHeight: 1, letterSpacing: '.02em', marginBottom: '.6rem' }}>
         {value}
       </div>
 
-      <div style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.55)', fontWeight: 300, marginBottom: '.4rem' }}>
+      <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,.65)', fontWeight: 300, marginBottom: '.5rem', lineHeight: 1.4 }}>
         {label}
       </div>
 
       {unit && (
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.6rem', letterSpacing: '.08em', color: accentColor, textTransform: 'uppercase', marginBottom: '.4rem' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', color: accentColor, textTransform: 'uppercase', marginBottom: '.4rem' }}>
           {unit}
         </div>
       )}
 
       {source && (
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.06em', color: 'rgba(255,255,255,.25)', textTransform: 'uppercase', marginTop: '.4rem' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.6rem', letterSpacing: '.06em', color: 'rgba(255,255,255,.3)', textTransform: 'uppercase', marginTop: '.5rem' }}>
           Source: {source}
         </div>
       )}
 
-      <style>{`@keyframes growBar { from{transform:scaleX(0)} to{transform:scaleX(1)} }`}</style>
+      <style>{`@keyframes growBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}`}</style>
     </div>
   )
 }
