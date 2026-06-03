@@ -141,3 +141,18 @@ body::before {
   .crisis-header { padding: 0 1.2rem !important; }
   .pages-intro { padding: 0 1.2rem !important; }
 }
+
+/* ── GLOBAL RESCUE OVERRIDES FOR ALL GRIDS ──────────────────────── */
+@media (max-width: 960px) {
+  /* Force the main landing grid and ANY multi-column section to stack vertically */
+  .pages-grid, 
+  [style*="grid-template-columns"], 
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Prevent horizontal overflowing elements from causing the grey column */
+  div, section, main, a {
+    max-width: 100% !important;
+  }
+}
