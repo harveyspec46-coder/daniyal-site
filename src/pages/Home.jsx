@@ -194,7 +194,7 @@ export default function Home() {
             { label: 'Title', value: 'Secretary, Board of Directors' },
             { label: 'Organization', value: 'Sawyer Culberson Project · 501(c)(3)' },
             { label: 'Appointed', value: 'February 2024' },
-            { label: 'Verification', value: 'sawyer-culberson-project.org' },
+            { label: 'Verification', value: 'sawyerculbersonproject.org' },
           ].map(({ label, value }) => (
             <div key={label} style={{ borderLeft: '3px solid rgba(15,26,20,.2)', paddingLeft: '1.2rem' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.55rem', letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(15,26,20,.5)', marginBottom: '.3rem' }}>{label}</div>

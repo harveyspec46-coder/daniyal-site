@@ -159,3 +159,50 @@ a { text-decoration: none; color: inherit; }
   .skills-grid { grid-template-columns: 1fr !important; }
   .hero-h1 { font-size: clamp(2.5rem, 13vw, 3.5rem) !important; }
 }
+
+/* ── INNER PAGE RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Any section using padding 3rem or 4rem on sides */
+  section {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+
+  /* Any 2-col grid inside sections becomes 1-col */
+  section > div[style*="grid-template-columns"],
+  section > div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Fix cut-off page hero titles */
+  h1, h2 {
+    font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Fix the intl-band and similar 2-col sections */
+  .intl-band {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 2.5rem 1.2rem !important;
+  }
+
+  /* Fix grid rows inside sections */
+  div[style*="gridTemplateColumns: '160px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Prevent anything from overflowing right edge */
+  * {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* But don't break flex/grid containers */
+  div[style*="display: 'flex'"],
+  div[style*="display: 'grid'"] {
+    max-width: 100% !important;
+  }
+}

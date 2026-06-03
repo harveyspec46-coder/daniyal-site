@@ -55,7 +55,7 @@ export default function Navbar() {
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="https://sawyer-culberson-project.org/donate" target="_blank" rel="noreferrer"
+          <a href="https://sawyerculbersonproject.org/donate" target="_blank" rel="noreferrer"
             style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.14em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '.5rem 1.2rem', fontWeight: 500 }}
           >Donate</a>
 
@@ -107,7 +107,7 @@ export default function Navbar() {
               })}
             >{label}</NavLink>
           ))}
-          <a href="https://sawyer-culberson-project.org/donate" target="_blank" rel="noreferrer"
+          <a href="https://sawyerculbersonproject.org/donate" target="_blank" rel="noreferrer"
             style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.14em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2rem', fontWeight: 500, marginTop: '1.5rem', display: 'inline-block', width: 'fit-content' }}
           >Donate to SCP</a>
         </div>

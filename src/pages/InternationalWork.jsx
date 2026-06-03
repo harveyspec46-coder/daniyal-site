@@ -108,7 +108,7 @@ export default function InternationalWork() {
           <blockquote style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem,2.5vw,1.9rem)', fontStyle: 'italic', fontWeight: 300, color: 'rgba(255,255,255,.8)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
             At the core of my leadership is a commitment to the highest standards of international safeguarding, bridging high-level global strategy with local execution across Pakistan and the US.
           </blockquote>
-          <a href="https://sawyer-culberson-project.org" target="_blank" rel="noreferrer"
+          <a href="https://sawyerculbersonproject.org" target="_blank" rel="noreferrer"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '.8rem', fontFamily: 'var(--font-mono)', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2rem' }}
           >Visit SCP Website</a>
         </div>
