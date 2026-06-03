@@ -46,7 +46,7 @@ export default function Ticker() {
         <div style={{
           display: 'flex',
           whiteSpace: 'nowrap',
-          animation: 'tickerScroll 50s linear infinite',
+          animation: 'tickerScroll 90s linear infinite',
           alignItems: 'center',
         }}>
           {doubled.map((item, i) => (

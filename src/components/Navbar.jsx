@@ -24,7 +24,7 @@ export default function Navbar() {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 3rem', height: 'var(--nav-height)',
+        padding: '0 1.5rem', height: 'var(--nav-height)',
         background: scrolled ? 'rgba(15,26,20,.99)' : 'rgba(15,26,20,.96)',
         backdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(201,168,76,.15)',
@@ -34,6 +34,7 @@ export default function Navbar() {
           DANIYAL<span style={{ color: 'var(--gold)' }}>.</span>
         </Link>
 
+        {/* Desktop links — hidden on mobile via CSS */}
         <ul className="nav-links" style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
           {links.map(({ to, label }) => (
             <li key={to}>
@@ -58,12 +59,14 @@ export default function Navbar() {
             style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.14em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '.5rem 1.2rem', fontWeight: 500 }}
           >Donate</a>
 
+          {/* Hamburger — shown on mobile via CSS */}
           <button
             className="nav-mobile-menu"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
             style={{ display: 'none', flexDirection: 'column', gap: '5px', padding: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
-            {[0,1,2].map(i => (
+            {[0, 1, 2].map(i => (
               <span key={i} style={{
                 display: 'block', width: 24, height: 2,
                 background: 'var(--white)',
@@ -79,6 +82,7 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Mobile overlay menu */}
       {menuOpen && (
         <div style={{
           position: 'fixed', top: 'var(--nav-height)', left: 0, right: 0, bottom: 0,
@@ -86,17 +90,18 @@ export default function Navbar() {
           zIndex: 99,
           display: 'flex', flexDirection: 'column',
           padding: '2rem 1.5rem',
-          gap: '0',
+          gap: 0,
+          overflowY: 'auto',
         }}>
           {links.map(({ to, label }) => (
             <NavLink key={to} to={to} end={to === '/'}
               onClick={() => setMenuOpen(false)}
               style={({ isActive }) => ({
                 fontFamily: 'var(--font-display)',
-                fontSize: '1.4rem',
+                fontSize: '1.6rem',
                 letterSpacing: '.04em',
-                color: isActive ? 'var(--gold)' : 'rgba(255,255,255,.8)',
-                padding: '.8rem 0',
+                color: isActive ? 'var(--gold)' : 'rgba(255,255,255,.85)',
+                padding: '.75rem 0',
                 borderBottom: '1px solid rgba(255,255,255,.08)',
                 transition: 'color .2s',
               })}

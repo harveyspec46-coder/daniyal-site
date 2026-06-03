@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '../lib/sanityClient'
-import { FEATURED_RESEARCH_QUERY, ALL_JOURNALISM_QUERY } from '../lib/queries'
+import { ALL_JOURNALISM_QUERY } from '../lib/queries'
 import Ticker from '../components/Ticker'
 import ArticleCard from '../components/ArticleCard'
 
@@ -37,7 +37,7 @@ function StatScroll({ stats, label, labelColor }) {
         {label}
       </div>
       <div style={{ overflow: 'hidden', background: 'rgba(255,255,255,.03)' }}>
-        <div style={{ display: 'flex', animation: 'statsScroll 40s linear infinite', width: 'max-content' }}>
+        <div className="stat-scroll-inner" style={{ display: 'flex', animation: 'statsScroll 80s linear infinite', width: 'max-content' }}>
           {doubled.map((stat, i) => (
             <div key={i} style={{ background: 'var(--ink)', padding: '2.5rem 2.5rem', position: 'relative', overflow: 'hidden', flexShrink: 0, width: '320px', borderRight: '1px solid rgba(255,255,255,.06)', transition: 'background .25s' }}
               onMouseEnter={e => { e.currentTarget.style.background = '#162010'; e.currentTarget.parentElement.style.animationPlayState = 'paused' }}
@@ -73,37 +73,12 @@ export default function Home() {
 
   return (
     <>
-      <style>{`
-        @keyframes statsScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.7} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-        @media (max-width: 900px) {
-          .hero-inner { grid-template-columns: 1fr !important; padding: 4rem 1.5rem 2rem !important; }
-          .hero-h1 { font-size: clamp(3.5rem,12vw,5rem) !important; }
-          .stat-stack { display: none !important; }
-          .hero-bar { gap: 1rem !important; padding: 1rem 1.5rem !important; }
-          .about-grid { grid-template-columns: 1fr !important; gap: 3rem !important; padding: 4rem 1.5rem !important; }
-          .crisis-header { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .crisis-section { padding: 4rem 1.5rem !important; }
-          .pages-intro { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .pages-grid { grid-template-columns: 1fr !important; grid-template-rows: auto !important; padding: 0 !important; }
-          .pages-grid a { grid-row: auto !important; min-height: 180px !important; }
-          .blog-strip { flex-direction: column !important; gap: 1rem !important; }
-          .cards-grid { grid-template-columns: 1fr !important; }
-          .cards-sec { padding: 4rem 1.5rem !important; }
-          .mission-grid { grid-template-columns: 1fr !important; gap: 2rem !important; padding: 3rem 1.5rem !important; }
-          .skills-grid { grid-template-columns: 1fr 1fr !important; }
-          .pages-header { padding: 0 1.5rem !important; }
-          .creds-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-
       {/* HERO */}
       <section style={{ minHeight: '100vh', background: 'var(--green-deep)', display: 'grid', gridTemplateRows: '1fr auto', position: 'relative', overflow: 'hidden', paddingTop: 'var(--nav-height)' }}>
         <div aria-hidden="true" style={{ position: 'absolute', fontFamily: 'var(--font-display)', fontSize: '42vw', color: 'rgba(255,255,255,.022)', lineHeight: 1, top: '-5%', right: '-8%', pointerEvents: 'none', userSelect: 'none' }}>D</div>
 
         <div className="hero-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', padding: '6rem 3rem 4rem', position: 'relative', zIndex: 2, gap: '3rem' }}>
-          <div style={{ animation: 'fadeUp .7s ease both' }}>
+          <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '.8rem' }}>
               <span style={{ width: 32, height: 1, background: 'var(--gold)', display: 'inline-block' }} />
               Karachi, Pakistan to SCP 501(c)(3) United States
@@ -116,21 +91,21 @@ export default function Home() {
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,.65)', lineHeight: 1.8, maxWidth: 480, marginBottom: '2rem' }}>
               Muhammad Daniyal Siddiqui — Secretary, Board of Directors at SCP. Photojournalist and researcher documenting the drug crisis across Pakistan and the United States.
             </p>
-            <div className="tags" style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {['Secretary · SCP Board', 'Drug Addiction', 'Photojournalism', 'Policy Research', 'US & Pakistan'].map((tag, i) => (
                 <span key={tag} style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', padding: '.35rem 1rem', border: i < 1 ? '1px solid var(--gold)' : '1px solid rgba(201,168,76,.35)', color: i < 1 ? 'var(--gold)' : 'rgba(255,255,255,.55)', background: i < 1 ? 'rgba(201,168,76,.08)' : 'transparent' }}>
                   {tag}
                 </span>
               ))}
             </div>
-            <div className="hero-btns" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
               <Link to="/documented-research" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2.2rem', fontWeight: 500 }}>Explore the Work</Link>
               <Link to="/journalism" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,.6)', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,.25)' }}>View Journalism</Link>
             </div>
           </div>
 
-          {/* RIGHT stat stack */}
-          <div className="stat-stack" style={{ display: 'flex', flexDirection: 'column', gap: 1, animation: 'fadeUp .7s .1s ease both', opacity: 0 }}>
+          {/* RIGHT stat stack — hidden on mobile */}
+          <div className="stat-stack" style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             {[
               { src: 'CDC 2025', lbl: 'Provisional Overdose Deaths', val: '69,973', unit: 'Deaths 2025', color: 'var(--gold)', flag: '🇺🇸' },
               { src: 'CDC 2024', lbl: 'Total Overdose Deaths', val: '80,391', unit: 'Deaths 2024', color: 'var(--gold)', flag: '🇺🇸' },
@@ -189,12 +164,11 @@ export default function Home() {
           </p>
           <Link to="/about" style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--ink)', padding: '1rem 2.2rem', fontWeight: 500, display: 'inline-block', marginBottom: '1.5rem' }}>Read My Full Story</Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: '.8rem', background: 'var(--green-deep)', color: 'var(--white)', padding: '1rem 1.5rem', fontFamily: 'var(--font-mono)', fontSize: '.68rem', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: '.5rem', width: 'fit-content' }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold)', animation: 'pulse 2s ease-in-out infinite', flexShrink: 0 }} />
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold)', flexShrink: 0 }} />
             Secretary · Board of Directors · SCP 501(c)(3)
           </div>
         </div>
 
-        {/* Skills — NO emojis */}
         <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
           {[
             { title: 'Software Engineer', desc: 'Self-taught Full Stack', bg: 'linear-gradient(135deg, var(--green-deep) 0%, var(--ink-muted) 100%)' },
@@ -242,7 +216,7 @@ export default function Home() {
             </h2>
           </div>
           <p style={{ fontSize: '1rem', lineHeight: 1.9, color: 'rgba(255,255,255,.5)', fontWeight: 300, borderLeft: '2px solid var(--gold)', paddingLeft: '1.5rem' }}>
-            These are not abstractions. Behind every statistic is a family, a community, a life. Drawn from CDC, NCHS, Pakistan National Drug Survey, and United Nations reports — hover any card to pause.
+            These are not abstractions. Behind every statistic is a family, a community, a life. Drawn from CDC, NCHS, Pakistan National Drug Survey, and United Nations reports.
           </p>
         </div>
 
@@ -254,7 +228,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PAGES GRID */}
+      {/* PAGES GRID — uses CSS class for responsive, NO inline gridTemplateColumns */}
       <section style={{ background: 'var(--cream)', padding: '6rem 0' }}>
         <div className="pages-intro pages-header" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'end', marginBottom: '3.5rem', padding: '0 3rem' }}>
           <div>
@@ -264,14 +238,14 @@ export default function Home() {
           <p style={{ fontSize: '1rem', lineHeight: 1.9, color: 'var(--text-muted)', fontWeight: 300 }}>From field photography in Karachi to board-level governance at SCP in the US, every section represents a different thread of the same work.</p>
         </div>
 
-        <div className="pages-grid" style={{ display: 'grid', gap: 2 }}>
+        <div className="pages-grid">
           {[
             { to: '/journalism', bg: 'var(--green-deep)', num: '01', title: 'JOURNALISM', desc: 'Photo essays, field interviews, and documented stories from the drug crisis. Raw. Real. Evidence-based.', color: 'var(--white)', span: true },
             { to: '/documented-research', bg: 'var(--cream-dark)', num: '02', title: 'DOCUMENTED RESEARCH', desc: 'UN reports, CDC data, and field findings.', color: 'var(--green-deep)', span: false },
             { to: '/international-work', bg: 'var(--gold)', num: '03', title: 'INTERNATIONAL WORK', desc: 'Board-level work with SCP 501(c)(3).', color: 'var(--ink)', span: false },
             { to: '/about', bg: 'var(--green-bright)', num: '04', title: 'ABOUT DANIYAL', desc: 'Background, skills, and the story behind bridging two nations.', color: 'var(--white)', span: false },
           ].map((tile) => (
-            <Link key={tile.to} to={tile.to} style={{ background: tile.bg, padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: tile.span ? 480 : 240, gridRow: tile.span ? 'span 2' : 'auto', position: 'relative', overflow: 'hidden', textDecoration: 'none', transition: 'filter .25s' }}
+            <Link key={tile.to} to={tile.to} style={{ background: tile.bg, padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: tile.span ? 480 : 240, gridRow: tile.span ? 'span 2' : 'auto', position: 'relative', overflow: 'hidden', transition: 'filter .25s' }}
               onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.08)'}
               onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
             >
@@ -283,7 +257,7 @@ export default function Home() {
               <span style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', fontSize: '1.8rem', color: tile.color === 'var(--white)' ? 'rgba(255,255,255,.2)' : 'rgba(15,26,20,.2)' }}>↗</span>
             </Link>
           ))}
-          <Link to="/" className="blog-strip" style={{ gridColumn: 'span 2', background: 'var(--ink)', padding: '1.8rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', textDecoration: 'none', transition: 'filter .25s' }}
+          <Link to="/" className="blog-strip" style={{ gridColumn: 'span 2', background: 'var(--ink)', padding: '1.8rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', transition: 'filter .25s' }}
             onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.12)'}
             onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
           >
