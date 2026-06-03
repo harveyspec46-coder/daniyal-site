@@ -103,7 +103,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               style={({ isActive }) => ({
                 fontFamily: 'var(--font-display)',
-                fontSize: '2.5rem',
+                fontSize: '1.5rem',
                 letterSpacing: '.04em',
                 color: isActive ? 'var(--gold)' : 'rgba(255,255,255,.8)',
                 padding: '1rem 0',

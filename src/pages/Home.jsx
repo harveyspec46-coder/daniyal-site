@@ -86,7 +86,7 @@ export default function Home() {
           .crisis-header { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .crisis-section { padding: 4rem 1.5rem !important; }
           .pages-intro { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .pages-grid { grid-template-columns: 1fr !important; grid-template-rows: auto !important; padding: 0 1.5rem 4rem !important; }
+          .pages-grid { grid-template-columns: 1fr !important; grid-template-rows: auto !important; padding: 0 !important; }
           .pages-grid a { grid-row: auto !important; min-height: 180px !important; }
           .blog-strip { flex-direction: column !important; gap: 1rem !important; }
           .cards-grid { grid-template-columns: 1fr !important; }
@@ -264,7 +264,7 @@ export default function Home() {
           <p style={{ fontSize: '1rem', lineHeight: 1.9, color: 'var(--text-muted)', fontWeight: 300 }}>From field photography in Karachi to board-level governance at SCP in the US, every section represents a different thread of the same work.</p>
         </div>
 
-        <div className="pages-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: 'auto auto', gap: 2 }}>
+        <div className="pages-grid" style={{ display: 'grid', gap: 2 }}>
           {[
             { to: '/journalism', bg: 'var(--green-deep)', num: '01', title: 'JOURNALISM', desc: 'Photo essays, field interviews, and documented stories from the drug crisis. Raw. Real. Evidence-based.', color: 'var(--white)', span: true },
             { to: '/documented-research', bg: 'var(--cream-dark)', num: '02', title: 'DOCUMENTED RESEARCH', desc: 'UN reports, CDC data, and field findings.', color: 'var(--green-deep)', span: false },
